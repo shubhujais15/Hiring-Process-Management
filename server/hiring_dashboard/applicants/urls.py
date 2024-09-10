@@ -1,11 +1,8 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from applicants.views import ApplicantViewSet,admin_login
-
-router = DefaultRouter()
-router.register(r'applicants', ApplicantViewSet)
+from django.urls import path
+from .views import applicants_list_create, applicant_detail, admin_login
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('applicants/', applicants_list_create, name='applicants_list_create'),
+    path('applicants/<int:pk>/', applicant_detail, name='applicant_detail'),
     path('admin-login/', admin_login, name='admin_login'),
 ]
