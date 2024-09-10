@@ -10,7 +10,7 @@ const TimeToHire = () => {
   useEffect(() => {
     const fetchApplicants = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/applicants/');
+        const response = await fetch('http://13.232.38.6:8000/applicants/');
         if (!response.ok) throw new Error('Failed to fetch applicants');
         const data = await response.json();
         const updatedData = data.map(calculateApplicantTimes);

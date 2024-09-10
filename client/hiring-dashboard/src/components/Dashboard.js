@@ -24,7 +24,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchApplicantsData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/applicants/');
+        const response = await fetch('http://13.232.38.6:8000/applicants/');
         const data = await response.json();
         setApplicants(data);
         calculateAvgTimeToFill(data);

@@ -5,7 +5,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const localizer = momentLocalizer(moment);
 
-const API_BASE_URL = "http://127.0.0.1:8000/applicants";
+const API_BASE_URL = "http://13.232.38.6:8000/applicants";
 
 // API functions
 const updateApplicant = async (id, data) => {
