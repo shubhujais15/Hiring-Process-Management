@@ -3,6 +3,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Applicant
 from .serializers import ApplicantSerializer
+from django.shortcuts import render
+
+def welcome(request):
+    return render(request, 'index.html')
 
 # List and Create Applicants
 @api_view(['GET', 'POST'])
