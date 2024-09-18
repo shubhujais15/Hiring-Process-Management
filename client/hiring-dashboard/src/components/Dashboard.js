@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import ApplicantTracking from './ApplicantTracking';
 import TimeToHire from './TimeToHire';
 import InterviewManagement from './InterviewManagement';
 import PerformanceAnalysis from './PerformanceAnalysis';
 import Sidebar from './Sidebar';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { setActivePage, toggleSidebar } from '../features/dashboardSlice';
+import useFetchApplicants from '../hooks/useFetchApplicants';
 
 const Dashboard = () => {
-  const [activePage, setActivePage] = useState('dashboard');
-  const [applicants, setApplicants] = useState([]);
-  const [avgTimeToFill, setAvgTimeToFill] = useState(null);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { activePage, applicants, avgTimeToFill, isSidebarOpen } = useSelector((state) => state.dashboard);
+  const { fetchApplicantsData } = useFetchApplicants();
 
   // Mapping of component names for the heading
   const pageTitles = {
@@ -21,52 +23,23 @@ const Dashboard = () => {
     'performance-analysis': 'Performance Analysis',
   };
 
-  useEffect(() => {
-    const fetchApplicantsData = async () => {
-      try {
-        const response = await fetch('http://13.232.38.6:8000/applicants/');
-        const data = await response.json();
-        setApplicants(data);
-        calculateAvgTimeToFill(data);
-      } catch (error) {
-        console.error('Error fetching applicants data:', error);
-      }
-    };
-
+  // Memoized fetch function to prevent unnecessary re-renders
+  const loadApplicants = useCallback(() => {
     fetchApplicantsData();
   }, []);
 
-  const calculateAvgTimeToFill = (data) => {
-    const hiredApplicants = data.filter((applicant) => applicant.status === 'hired');
-
-    if (hiredApplicants.length === 0) {
-      setAvgTimeToFill(null);
-      return;
-    }
-
-    const totalDays = hiredApplicants.reduce((acc, applicant) => {
-      const applicationDate = new Date(applicant.application_date);
-      const offerLetterDate = applicant.offer_letter_date ? new Date(applicant.offer_letter_date) : null;
-
-      if (offerLetterDate) {
-        const timeToFill = (offerLetterDate - applicationDate) / (1000 * 60 * 60 * 24);
-        return acc + timeToFill;
-      }
-      return acc;
-    }, 0);
-
-    const averageDays = totalDays / hiredApplicants.length;
-    setAvgTimeToFill(Math.round(averageDays));
-  };
+  useEffect(() => {
+    loadApplicants();
+  }, [loadApplicants]);
 
   const renderContent = () => {
     switch (activePage) {
       case 'applicant-tracking':
-        return <ApplicantTracking applicants={applicants} />;
+        return <ApplicantTracking />;
       case 'time-to-hire':
-        return <TimeToHire applicants={applicants} />;
+        return <TimeToHire />;
       case 'interview-management':
-        return <InterviewManagement applicants={applicants} />;
+        return <InterviewManagement />;
       case 'performance-analysis':
         return <PerformanceAnalysis />;
       default:
@@ -98,26 +71,26 @@ const Dashboard = () => {
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
-      <Sidebar setActivePage={setActivePage} isSidebarOpen={isSidebarOpen} toggleSidebar={setIsSidebarOpen} />
+      <Sidebar 
+        setActivePage={(page) => dispatch(setActivePage(page))} 
+        isSidebarOpen={isSidebarOpen} 
+        toggleSidebar={() => dispatch(toggleSidebar())} 
+      />
 
       {/* Main Content */}
-      <div className={`flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'} p-4`}>
-        
+      <div className={`my-14 flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'} p-4`}>
         <div className="bg-gray-900 text-white py-4 px-6 shadow-md">
           <div className="flex items-center">
-
-             {/* Hamburger Icon */}
-             <button
+            {/* Hamburger Icon */}
+            <button
               className="text-white bg-gray-800 p-2 focus:outline-none block"
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              onClick={() => dispatch(toggleSidebar())}
             >
               {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
             </button>
 
             {/* Dynamic Page Title */}
             <h1 className="ml-4 text-2xl">{pageTitles[activePage]}</h1>
-
-           
           </div>
         </div>
 
