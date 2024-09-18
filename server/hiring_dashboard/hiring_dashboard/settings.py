@@ -146,3 +146,7 @@ CORS_ALLOW_HEADERS = [
     'content-type',
     'authorization',
 ]
+
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
