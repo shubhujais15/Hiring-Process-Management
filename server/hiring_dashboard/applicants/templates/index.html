@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Hiring Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1>Welcome to the Hiring Dashboard</h1>
+    <p>Please use the navigation below to proceed:</p>
+    <ul>
+        <li><a href="{% url 'applicants_list_create' %}">View Applicants</a></li>
+        <!-- <li><a href="{% url 'admin_login' %}">Admin Login</a></li> -->
+    </ul>
+</body>
+</html>
