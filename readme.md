@@ -47,4 +47,7 @@ The backend is built using Django and includes:
 - Django REST Framework: To build the API that connects to the frontend.
 - cors-headers: To handle Cross-Origin Resource Sharing (CORS) for development.
 
+## Hosted Web App
 
+You can view the live version of the Hiring Process Management by visiting the following link:
+[Hiring Process Management](http://13.232.38.6:3000/)
