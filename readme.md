@@ -51,3 +51,5 @@ The backend is built using Django and includes:
 
 You can view the live version of the Hiring Process Management by visiting the following link:
 [Hiring Process Management](http://13.232.38.6:3000/)
+- username: admin@gmail.com
+- password: admin123
