@@ -130,7 +130,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
-        'http://localhost:3000','http://13.232.38.6:3000','http://127.0.0.1:8000'  # Add your React frontend origin
+        'http://localhost:3000','http://13.232.38.6:3000','http://127.0.0.1:8000' , 'https://hiring-process-management.vercel.app/' # Add your React frontend origin
 ]
 
 CORS_ALLOW_METHODS = [
