@@ -1,24 +1,15 @@
 {
-    "version": 2,
-    "builds": [
+  "builds": [
       {
-        "src": "server/hiring_dashboard/manage.py",
-        "use": "@vercel/python"
-      },
-      {
-        "src": "server/hiring_dashboard/staticfiles/**/*",
-        "use": "@vercel/static"
+          "src": "hiring_dashboard/wsgi.py",
+          "use": "@vercel/python",
+          "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
       }
-    ],
-    "routes": [
+  ],
+  "routes": [
       {
-        "src": "/static/(.*)",
-        "dest": "/server/hiring_dashboard/staticfiles/$1"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/server/hiring_dashboard/manage.py"
+          "src": "/(.*)",
+          "dest": "hiring_dashboard/wsgi.py"
       }
-    ]
-  }
-  
+  ]
+}
