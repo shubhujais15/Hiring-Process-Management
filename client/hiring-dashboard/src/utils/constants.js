@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-export const API_BASE_URL = "http://13.232.38.6:8000/applicants";
+export const API_BASE_URL = process.env.REACT_APP_APPLICANT_API;
 
 // Async Thunks for API calls
 

@@ -6,6 +6,8 @@ const Login = ({ onLogin }) => {
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
 
+    const ADMIN_LOGIN_API = process.env.REACT_APP_ADMIN_LOGIN_API; 
+
     // Handle login form submission
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -13,7 +15,7 @@ const Login = ({ onLogin }) => {
         setMessage('');
 
         try {
-            const response = await fetch('http://13.232.38.6:8000/admin-login/', {
+            const response = await fetch(ADMIN_LOGIN_API, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -37,19 +39,19 @@ const Login = ({ onLogin }) => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="w-full max-w-xs sm:max-w-md p-6 bg-white shadow-md rounded-lg">
+        <div className="flex items-center justify-center min-h-screen">
+            <div className="w-full max-w-xs sm:max-w-md p-6 bg-white shadow-lg rounded-lg">
                 <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center">Admin Login</h2>
                 <form onSubmit={handleLogin}>
                     <div className="mb-4">
-                        <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
+                        <label htmlFor="username" className="block text-sm font-medium text-gray-700">Email</label>
                         <input
                             id="username"
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Enter admin username"
+                            placeholder="Enter admin email"
                             required
                         />
                     </div>
