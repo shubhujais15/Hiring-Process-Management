@@ -78,7 +78,7 @@ const Dashboard = () => {
       />
 
       {/* Main Content */}
-      <div className={`my-14 flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'} p-4`}>
+      <div className={`my-20 flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'} p-4`}>
         <div className="bg-gray-900 text-white py-4 px-6 shadow-md">
           <div className="flex items-center">
             {/* Hamburger Icon */}

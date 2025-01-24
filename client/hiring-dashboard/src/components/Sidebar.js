@@ -3,7 +3,7 @@ import React from 'react';
 const Sidebar = ({ setActivePage, isSidebarOpen, toggleSidebar }) => {
   return (
     <div
-      className={`fixed top-24 left-0 w-64 h-full bg-gray-800 text-white p-4 z-40 transition-transform transform ${
+      className={`fixed top-28 left-0 w-64 h-full bg-gray-800 text-white p-4 z-40 transition-transform transform ${
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}
     >
