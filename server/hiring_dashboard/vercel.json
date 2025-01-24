@@ -1,0 +1,24 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "server/hiring_dashboard/manage.py",
+        "use": "@vercel/python"
+      },
+      {
+        "src": "server/hiring_dashboard/staticfiles/**/*",
+        "use": "@vercel/static"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/static/(.*)",
+        "dest": "/server/hiring_dashboard/staticfiles/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/server/hiring_dashboard/manage.py"
+      }
+    ]
+  }
+  
